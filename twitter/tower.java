@@ -1,18 +1,21 @@
-import java.sql.SQLOutput;
+// This class is the logical part of the project
 
 public class tower {
     private int height;
     private int width;
     private boolean isRectangle;
+
     final int RIB_DIFFERENCE = 5;
     final int SIZE_LINE_BEFORE_THE_LAST = 3;
 
+    //constructor
     public tower(int height, int width, boolean isRectangle) {
         this.height = height;
         this.width = width;
         this.isRectangle = isRectangle;
     }
 
+    //Printing a rectangle according to requirements
     public String printRectangle() {
         if (height == width || Math.abs(height - width) > RIB_DIFFERENCE)
         {
@@ -25,12 +28,14 @@ public class tower {
         }
     }
 
+    //Print the perimeter of the triangle
     public String printTriangularScope()
     {
         double rib = Math.sqrt(Math.pow(2, height) + Math.pow(2, width));
         return ("The perimeter of the tower: " + (rib*2 + width * 2));
     }
 
+    //The actual triangle print
     public String printTriangularArea() {
         if (width % 2 == 0 || width > 2 * height) {
             System.out.println("The tower cannot be printed");
