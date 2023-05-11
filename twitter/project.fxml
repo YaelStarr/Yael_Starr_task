@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="765.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ProjectController">
+   <children>
+      <ImageView fitHeight="567.0" fitWidth="599.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblMain" layoutX="6.0" layoutY="14.0" prefHeight="74.0" prefWidth="651.0" style="-fx-font-size: 40;" text="twitter" textAlignment="CENTER">
+         <font>
+            <Font name="Jokerman" size="34.0" />
+         </font></Label>
+      <TextField fx:id="txtHeight" layoutX="204.0" layoutY="234.0" />
+      <TextField fx:id="txtWidth" layoutX="204.0" layoutY="274.0" />
+      <HBox layoutX="12.0" layoutY="115.0" prefHeight="66.0" prefWidth="382.0">
+         <children>
+            <Button fx:id="btnRectangle" mnemonicParsing="false" onAction="#rectangleSelected" prefHeight="66.0" prefWidth="166.0" style="-fx-font-size: 30;" text="rectangle" />
+            <Button fx:id="btnTriangular" mnemonicParsing="false" onAction="#triangularSelected" prefHeight="66.0" prefWidth="174.0" style="-fx-font-size: 30;" text="triangular" />
+         </children>
+      </HBox>
+      <Label fx:id="lblHeight" layoutX="25.0" layoutY="234.0" text="The height of the tower" />
+      <Label fx:id="lblWidth" layoutX="28.0" layoutY="274.0" text="The width of the tower" />
+      <Button fx:id="btnPrint" layoutX="132.0" layoutY="448.0" mnemonicParsing="false" onAction="#printClicked" prefHeight="66.0" prefWidth="106.0" style="-fx-font-size: 30;" text="print" />
+      <Button fx:id="btnTriangleParameter" layoutX="21.0" layoutY="225.0" mnemonicParsing="false" onAction="#printTriangleParameter" prefHeight="43.0" prefWidth="328.0" style="-fx-font-size: 20;" text="Print the perimeter of the triangle">
+         <font>
+            <Font name="Guttman Haim-Condensed" size="8.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnPrintTriangle" layoutX="21.0" layoutY="281.0" mnemonicParsing="false" onAction="#printTriangle" prefHeight="43.0" prefWidth="328.0" style="-fx-font-size: 20;" text="print the triangle">
+         <font>
+            <Font name="Guttman Haim-Condensed" size="8.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="txtArea" layoutX="377.0" prefHeight="567.0" prefWidth="394.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>
