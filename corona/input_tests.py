@@ -1,9 +1,9 @@
-# Check if the ID is valid (contains only digits and has length 9)
+
 import datetime
 
 from data_base import get_db, do_query
 
-
+# Check if the ID is valid (contains only digits and has length 9)
 def checks_id(ID: str) -> bool:
     if not ID.isdigit() or len(ID) != 9:
         return False

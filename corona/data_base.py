@@ -45,14 +45,7 @@ def create_schema():
     db.close()
 
 
-# def do_query(query: str, params: list):
-#     conn = get_db()
-#     cur = conn.execute(query, params)
-#     record = cur.fetchone()
-#     conn.close()
-#     return record
-
-
+# function to retrieve from the table
 def do_query(query: str, args=()):
     conn = sqlite3.connect(DATABASE)
     cursor = conn.cursor()
@@ -63,6 +56,7 @@ def do_query(query: str, args=()):
     return result
 
 
+# function to update a table
 def insert_update_query(query: str, params) -> str:
     conn = sqlite3.connect(DATABASE)
     conn.text_factory = sqlite3.Row
@@ -75,6 +69,7 @@ def insert_update_query(query: str, params) -> str:
     return result
 
 
+# function that extracts the image from the table and returns it in binary
 def return_image(image_id):
     # Retrieve the binary image data from the database using the ID
     db = get_db()
@@ -84,6 +79,7 @@ def return_image(image_id):
     return image_binary
 
 
+# A function that returns the number of patients on a certain day
 def receive_quantity_of_patients(date_to_check):
     # Query the database for all patients who were active on this day
     query = "SELECT COUNT(*) FROM employees WHERE illness_date <= ? AND recovery_date >= ?"

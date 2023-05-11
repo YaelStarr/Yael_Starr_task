@@ -16,7 +16,6 @@ RECOVERY_TIME = 14
 @app.route('/api/employees', methods=['GET'])
 def get_employees_records():
     records = do_query('SELECT * FROM employees')
-    # return jsonify([dict(row) for row in records])
     return jsonify(records)
 
 
@@ -26,7 +25,6 @@ def get_employee_record(employee_id):
     record = do_query('SELECT * FROM employees WHERE id = ?', [employee_id])
     if not record:
         return jsonify({'error': 'Record not found'}), 404
-    # return jsonify(dict(record))
     return jsonify(record)
 
 
@@ -82,11 +80,11 @@ def add_employee_record():
         return jsonify({'error': 'Duplicate ID'}), 400
 
 
+# The function returns the vaccination table
 @app.route('/api/vaccines', methods=['GET'])
 def get_vaccines_records():
     records = do_query('SELECT * FROM vaccines')
     return jsonify(records)
-    # return jsonify([dict(row) for row in records])
 
 
 # API endpoint for retrieving a single vaccines by ID
@@ -96,7 +94,6 @@ def get_vaccines_record(employee_id):
     if record is None:
         return jsonify({'error': 'Record not found'}), 404
     return jsonify(record)
-    # return jsonify([dict(row) for row in record])
 
 
 # API endpoint for adding a new record
@@ -135,6 +132,7 @@ def add_vaccines_record():
         return jsonify({'error': 'There will not be 2 corona vaccinations on the same day'}), 400
 
 
+#Function for inserting a picture of a patient
 @app.route('/api/insert_image', methods=['POST'])
 def insert_image():
     # Get the base64-encoded image data and ID from the request
@@ -158,6 +156,7 @@ def insert_image():
         return jsonify({'error': 'There is already an image in the system for this patient'}), 400
 
 
+#A function for retrieving a patient's image
 @app.route('/api/get_image/<image_id>', methods=['GET'])
 def get_image(image_id):
     image_binary = return_image(image_id)
@@ -172,6 +171,7 @@ def get_image(image_id):
     return response
 
 
+#A function that receives the number of patients when they are not vaccinated
 @app.route('/api/get_unvaccinated_patients', methods=['GET'])
 def get_unvaccinated_patients():
     records = do_query("SELECT id FROM vaccines GROUP BY id ")
@@ -181,79 +181,6 @@ def get_unvaccinated_patients():
     return jsonify({'The number of clients who are not vaccinated': num_of_patients - num_of_vaccinated_patients})
 
 
-# import datetime
-#
-#
-# @app.route('/api/count_active_patients_per_day_last_month', methods=['GET'])
-# def count_active_patients_per_day_last_month():
-#     # Calculate the date one month ago
-#     one_month_ago = datetime.date.today() - datetime.timedelta(days=30)
-#
-#     # Create a list to hold the results
-#     results = []
-#
-#     # Loop over each day in the last month
-#     for i in range(30):
-#         date_to_check = one_month_ago + datetime.timedelta(days=i)
-#
-#         # Query the database for all patients who were active on this day
-#         query = "SELECT COUNT(*) FROM employees WHERE illness_date <= ? AND recovery_date >= ?"
-#         db = get_db()
-#         count = db.execute(query, (date_to_check, date_to_check)).fetchone()[0]
-#
-#         # Add the result for this day to the list of results
-#         results.append({
-#             'date': str(date_to_check),
-#             'count': count
-#         })
-#
-#     # Return the results as JSON
-#     return jsonify(results)
-
-#
-# import datetime
-# import matplotlib.pyplot as plt
-#
-#
-# @app.route('/api/count_active_patients_per_day_last_month', methods=['GET'])
-# def count_active_patients_per_day_last_month():
-#     # Calculate the date one month ago
-#     one_month_ago = datetime.date.today() - datetime.timedelta(days=30)
-#
-#     # Create a list to hold the results
-#     results = []
-#
-#     # Loop over each day in the last month
-#     for i in range(30):
-#         date_to_check = one_month_ago + datetime.timedelta(days=i)
-#
-#         # Query the database for all patients who were active on this day
-#         query = "SELECT COUNT(*) FROM employees WHERE illness_date <= ? AND recovery_date >= ?"
-#         db = get_db()
-#         count = db.execute(query, (date_to_check, date_to_check)).fetchone()[0]
-#
-#         # Add the result for this day to the list of results
-#         results.append({
-#             'date': str(date_to_check),
-#             'count': count
-#         })
-#
-#     # Plot the data using matplotlib
-#     dates = [datetime.datetime.strptime(result['date'], '%Y-%m-%d').date() for result in results]
-#     counts = [result['count'] for result in results]
-#     plt.plot(dates, counts)
-#     plt.xlabel('Date')
-#     plt.ylabel('Number of active patients')
-#     plt.title('Active Patients in the Last Month')
-#     plt.grid(True)
-#
-#     # Save the plot to a file
-#     plt.savefig('active_patients_last_month.png')
-#
-#     # Return the results as JSON
-#     return jsonify(results)
-
-
 import datetime
 import matplotlib
 
@@ -261,6 +188,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
+# function to retrieve a graph of the patients who were in the last month
 @app.route('/api/count_active_patients_per_day_last_month', methods=['GET'])
 def count_active_patients_per_day_last_month():
     # Calculate the date one month ago
@@ -277,12 +205,6 @@ def count_active_patients_per_day_last_month():
         query = "SELECT COUNT(*) FROM employees WHERE illness_date <= ? AND recovery_date >= ?"
         db = get_db()
         count = db.execute(query, (date_to_check, date_to_check)).fetchone()[0]
-
-        # # Add the result for this day to the list of results
-        # results.append({
-        #     'date': str(date_to_check),
-        #     'count': count
-        # })
 
         # Add the result for this day to the list of results
         results.append({
@@ -301,6 +223,7 @@ def count_active_patients_per_day_last_month():
 
     # Return the file as a response
     return send_file('plot.png', mimetype='image/png')
+
 
 if __name__ == '__main__':
     create_schema()
