@@ -31,7 +31,7 @@ public class tower {
     //Print the perimeter of the triangle
     public String printTriangularScope()
     {
-        double rib = Math.sqrt(Math.pow(2, height) + Math.pow(2, width));
+        double rib = Math.sqrt(Math.pow(height, 2) + Math.pow(width, 2));
         return ("The perimeter of the tower: " + (rib*2 + width * 2));
     }
 
